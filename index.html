@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <img class="background" src="./src/background.jpg" alt="" />
+    <article class="calculator">
+      <div class="">
+        <input type="text" id="input" placeholder="Coloque su operación" />
+      </div>
+      <ul class="calc-container">
+        <li class="calc-button" id="7">7</li>
+        <li class="calc-button" id="8">8</li>
+        <li class="calc-button" id="9">9</li>
+        <li class="calc-button" id="division">/</li>
+        <li class="calc-button" id="4">4</li>
+        <li class="calc-button" id="5">5</li>
+        <li class="calc-button" id="6">6</li>
+        <li class="calc-button" if="multiplication">*</li>
+        <li class="calc-button" id="1">1</li>
+        <li class="calc-button" id="2">2</li>
+        <li class="calc-button" id="3">3</li>
+        <li class="calc-button" id="minus">-</li>
+        <li class="calc-button" id="0">0</li>
+        <li class="calc-button" id="coma">,</li>
+        <li class="calc-button" id="plus">+</li>
+        <li class="calc-button-equal" id="equal">=</li>
+      </ul>
+    </article>
+
+    <script>
+      let input = document.getElementById("input");
+      let buttons = document.querySelectorAll(".calc-button");
+
+      document.addEventListener("click", (e) => {
+        buttons.forEach((button) => {
+          if (e.target === button) {
+            input.value = `${input.value}` + `${button.textContent}`;
+          }
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (input.value !== "") {
+          if (e.target === document.querySelector(".calc-button-equal")) {
+            try {
+              let resultado = eval(input.value);
+              input.value = resultado;
+            } catch (e) {
+              alert("Ingrese una operación válida");
+              input.value = "";
+            }
+          }
+        }
+      });
+      function resetHeight() {
+        // reset the body height to that of the inner browser
+        document.body.style.height = window.innerHeight + "px";
+      }
+      // reset the height whenever the window's resized
+      window.addEventListener("resize", resetHeight);
+      // called to initially set the height.
+      resetHeight();
+    </script>
+  </body>
+</html>
